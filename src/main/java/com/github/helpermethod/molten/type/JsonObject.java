@@ -1,9 +1,10 @@
-package com.github.helpermethod.molten.types;
+package com.github.helpermethod.molten.type;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.function.Consumer;
+
+import static com.github.helpermethod.molten.function.Functions.wrap;
 
 public class JsonObject {
     private final JSONObject jsonObject;
@@ -13,10 +14,13 @@ public class JsonObject {
     }
 
     public JsonObject prop(String key, Consumer<JsonProperty> consumer) {
-        JsonProperty fluentProperty = new JsonProperty(key, jsonObject);
-        consumer.accept(fluentProperty);
+        consumer.accept(new JsonProperty(key, jsonObject));
 
         return this;
+    }
+
+    public JSONObject toJson() {
+        return wrap(() -> new JSONObject(jsonObject.toString()));
     }
 
     public String toString() {
@@ -24,10 +28,6 @@ public class JsonObject {
     }
 
     public String toPrettyString() {
-        try {
-            return jsonObject.toString(4);
-        } catch (JSONException e) {
-            throw new AssertionError();
-        }
+        return wrap(() -> jsonObject.toString(4));
     }
 }
