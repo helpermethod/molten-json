@@ -15,9 +15,9 @@ public class Json {
         return new JsonObject(new JSONObject());
     }
 
-    public static JsonObject obj(Consumer<JsonObject> consumer) {
+    public static JsonObject obj(Consumer<JsonObject> c) {
         JsonObject moltenObject = new JsonObject(new JSONObject());
-        consumer.accept(moltenObject);
+        c.accept(moltenObject);
 
         return moltenObject;
     }
@@ -26,9 +26,9 @@ public class Json {
         return new JsonArray(new JSONArray());
     }
 
-    public static JsonArray arr(Consumer<JsonArray> consumer) {
+    public static JsonArray arr(Consumer<JsonArray> c) {
         JsonArray moltenArray = new JsonArray(new JSONArray());
-        consumer.accept(moltenArray);
+        c.accept(moltenArray);
 
         return moltenArray;
     }

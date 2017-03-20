@@ -2,11 +2,11 @@ package com.github.helpermethod.molten.function;
 
 import org.json.JSONException;
 
-public class Functions {
-    private Functions() {
+public class Errors {
+    private Errors() {
     }
 
-    public static <T> T wrap(ThrowingSupplier<T> s) {
+    public static <T> T suppress(CheckedSupplier<T> s) {
         try {
             return s.get();
         } catch (JSONException e) {

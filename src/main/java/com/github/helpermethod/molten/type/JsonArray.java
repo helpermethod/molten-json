@@ -1,12 +1,12 @@
 package com.github.helpermethod.molten.type;
 
+import com.github.helpermethod.molten.stream.Streams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
-import static com.github.helpermethod.molten.function.Functions.wrap;
+import static com.github.helpermethod.molten.function.Errors.suppress;
 
 public class JsonArray {
     private final JSONArray jsonArray;
@@ -15,21 +15,24 @@ public class JsonArray {
         this.jsonArray = jsonArray;
     }
 
-    public JsonArray str(String value, String... rest) {
-        return putAll(value, rest);
+    public JsonArray str(String... values) {
+        Arrays.stream(values).forEach(jsonArray::put);
+
+        return this;
     }
 
-    public JsonArray num(Double value, Double... rest) {
-        return putAll(value, rest);
+    public JsonArray num(double... values) {
+        Streams.ofAll(values).forEach(jsonArray::put);
+
+        return this;
     }
 
-    public JsonArray bool(Boolean value, Boolean... rest) {
-        return putAll(value, rest);
+    public JsonArray bool(boolean... values) {
+        Streams.ofAll(values).forEach(jsonArray::put);
+
+        return this;
     }
 
-    // .nil()
-    // .nil(null)
-    // .nil(null, null)
     public JsonArray nil(Void... values) {
         if (isEmpty(values)) {
             jsonArray.put(JSONObject.NULL);
@@ -46,18 +49,11 @@ public class JsonArray {
         return values != null && values.length == 0;
     }
 
-    private <T> JsonArray putAll(T value, T... rest) {
-        jsonArray.put(value);
-        Arrays.stream(rest).forEach(jsonArray::put);
-
-        return this;
-    }
-
     public String toString() {
         return jsonArray.toString();
     }
 
     public String toPrettyString() {
-        return wrap(() -> jsonArray.toString(4));
+        return suppress(() -> jsonArray.toString(4));
     }
 }

@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.util.function.Consumer;
 
-import static com.github.helpermethod.molten.function.Functions.wrap;
+import static com.github.helpermethod.molten.function.Errors.suppress;
 
 public class JsonObject {
     private final JSONObject jsonObject;
@@ -13,14 +13,14 @@ public class JsonObject {
         this.jsonObject = jsonObject;
     }
 
-    public JsonObject prop(String key, Consumer<JsonProperty> consumer) {
-        consumer.accept(new JsonProperty(key, jsonObject));
+    public JsonObject str(String key, String value) {
+        suppress(() -> jsonObject.put(key, value));
 
         return this;
     }
 
     public JSONObject toJson() {
-        return wrap(() -> new JSONObject(jsonObject.toString()));
+        return jsonObject;
     }
 
     public String toString() {
@@ -28,6 +28,6 @@ public class JsonObject {
     }
 
     public String toPrettyString() {
-        return wrap(() -> jsonObject.toString(4));
+        return suppress(() -> jsonObject.toString(4));
     }
 }
