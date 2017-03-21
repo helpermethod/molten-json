@@ -1,7 +1,6 @@
 package com.github.helpermethod.molten
 
 import groovy.json.JsonSlurper
-import org.json.JSONObject
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -11,11 +10,11 @@ class JsonSpecification extends Specification {
 
     def 'create an empty JSON object'() {
         expect:
-        slurper.parseText Json.obj() == slurper.parseText '{}'
+        slurper.parseText(Json.obj().toString()) == slurper.parseText('{}')
     }
 
     def 'create an empty JSON array'() {
         expect:
-        slurper.parseText Json.arr() == slurper.parseText '[]'
+        slurper.parseText(Json.arr().toString()) == slurper.parseText('[]')
     }
 }
