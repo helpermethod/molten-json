@@ -12,22 +12,22 @@ public class Json {
     }
 
     public static JsonObject object() {
-        return new JsonObject(new JSONObject());
+        return new JsonObject();
     }
 
     public static JsonObject object(Consumer<JsonObject> c) {
-        JsonObject moltenObject = new JsonObject(new JSONObject());
+        JsonObject moltenObject = new JsonObject();
         c.accept(moltenObject);
 
         return moltenObject;
     }
 
     public static JsonArray array() {
-        return new JsonArray(new JSONArray());
+        return new JsonArray();
     }
 
     public static JsonArray array(Consumer<JsonArray> c) {
-        JsonArray moltenArray = new JsonArray(new JSONArray());
+        JsonArray moltenArray = new JsonArray();
         c.accept(moltenArray);
 
         return moltenArray;

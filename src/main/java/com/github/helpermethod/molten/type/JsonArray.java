@@ -13,8 +13,8 @@ import static java.util.stream.IntStream.range;
 public class JsonArray {
     private final JSONArray jsonArray;
 
-    public JsonArray(JSONArray jsonArray) {
-        this.jsonArray = jsonArray;
+    public JsonArray() {
+        this.jsonArray = new JSONArray();
     }
 
     public JsonArray string(String... values) {
@@ -42,7 +42,7 @@ public class JsonArray {
     }
 
     public JsonArray object(Consumer<JsonObject> value) {
-        JsonObject moltenObject = new JsonObject(new JSONObject());
+        JsonObject moltenObject = new JsonObject();
         value.accept(moltenObject);
 
         jsonArray.put(moltenObject.toJson());
@@ -51,7 +51,7 @@ public class JsonArray {
     }
 
     public JsonArray array(Consumer<JsonArray> value) {
-        JsonArray moltenArray = new JsonArray(new JSONArray());
+        JsonArray moltenArray = new JsonArray();
         value.accept(moltenArray);
 
         jsonArray.put(moltenArray.toJson());

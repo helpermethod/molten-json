@@ -11,8 +11,8 @@ import static java.util.Objects.requireNonNull;
 public class JsonObject {
     private final JSONObject jsonObject;
 
-    public JsonObject(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
+    public JsonObject() {
+        this.jsonObject = new JSONObject();
     }
 
     public JsonObject string(String key, String value) {
