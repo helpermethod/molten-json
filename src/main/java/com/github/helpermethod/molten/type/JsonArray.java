@@ -42,29 +42,27 @@ public class JsonArray {
     }
 
     public JsonArray object(Consumer<JsonObject> value) {
-        JsonObject moltenObject = new JsonObject(new JSONObject());
+        JSONObject jsonObject = new JSONObject();
+        JsonObject moltenObject = new JsonObject(jsonObject);
         value.accept(moltenObject);
 
-        jsonArray.put(moltenObject.toJson());
+        jsonArray.put(jsonObject);
 
         return this;
     }
 
     public JsonArray array(Consumer<JsonArray> value) {
-        JsonArray moltenArray = new JsonArray(new JSONArray());
+        JSONArray jsonArray = new JSONArray();
+        JsonArray moltenArray = new JsonArray(jsonArray);
         value.accept(moltenArray);
 
-        jsonArray.put(moltenArray.toJson());
+        this.jsonArray.put(jsonArray);
 
         return this;
     }
 
     private boolean isEmpty(Void[] values) {
         return values != null && values.length == 0;
-    }
-
-    public JSONArray toJson() {
-        return jsonArray;
     }
 
     @Override

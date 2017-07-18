@@ -1,5 +1,6 @@
 package com.github.helpermethod.molten.type;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Objects;
@@ -42,16 +43,13 @@ public class JsonObject {
     }
 
     public JsonObject array(String key, Consumer<JsonArray> value) {
-        JsonArray jsonArray = new JsonArray();
-        value.accept(jsonArray);
+        JSONArray jsonArray = new JSONArray();
+        JsonArray moltenArray = new JsonArray(jsonArray);
+        value.accept(moltenArray);
 
-        suppress(() -> jsonObject.put(key, jsonArray.toJson()));
+        suppress(() -> jsonObject.put(key, jsonArray));
 
         return this;
-    }
-
-    public JSONObject toJson() {
-        return jsonObject;
     }
 
     @Override
