@@ -3,6 +3,6 @@ package com.github.helpermethod.molten.function;
 import org.json.JSONException;
 
 @FunctionalInterface
-public interface CheckedSupplier<T> {
+public interface ThrowingSupplier<T> {
     T get() throws JSONException;
 }

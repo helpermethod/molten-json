@@ -6,7 +6,7 @@ public class Errors {
     private Errors() {
     }
 
-    public static <T> T suppress(CheckedSupplier<T> s) {
+    public static <T> T suppress(ThrowingSupplier<T> s) {
         try {
             return s.get();
         } catch (JSONException e) {
