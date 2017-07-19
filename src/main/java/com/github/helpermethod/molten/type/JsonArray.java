@@ -2,77 +2,73 @@ package com.github.helpermethod.molten.type;
 
 import com.github.helpermethod.molten.stream.Streams;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 import static com.github.helpermethod.molten.function.Errors.suppress;
 import static java.util.stream.IntStream.range;
+import static org.json.JSONObject.NULL;
 
 public class JsonArray {
-    private final JSONArray jsonArray;
+	private final JSONArray jsonArray;
 
-    public JsonArray() {
-        this.jsonArray = new JSONArray();
-    }
+	public JsonArray() {
+		this.jsonArray = new JSONArray();
+	}
 
-    public JsonArray string(String... values) {
-        Arrays.stream(values).forEach(jsonArray::put);
+	public JsonArray string(String... values) {
+		Arrays.stream(values).forEach(jsonArray::put);
 
-        return this;
-    }
+		return this;
+	}
 
-    public JsonArray number(double... values) {
-        Streams.ofAll(values).forEach(jsonArray::put);
+	public JsonArray number(double... values) {
+		Streams.ofAll(values).forEach(jsonArray::put);
 
-        return this;
-    }
+		return this;
+	}
 
-    public JsonArray bool(boolean... values) {
-        Streams.ofAll(values).forEach(jsonArray::put);
+	public JsonArray bool(boolean... values) {
+		Streams.ofAll(values).forEach(jsonArray::put);
 
-        return this;
-    }
+		return this;
+	}
 
-    public JsonArray nil(int number) {
-        range(0, number).forEach(i -> jsonArray.put(JSONObject.NULL));
+	public JsonArray nil(int number) {
+		range(0, number).forEach(i -> jsonArray.put(NULL));
 
-        return this;
-    }
+		return this;
+	}
 
-    public JsonArray object(Consumer<JsonObject> value) {
-        JsonObject moltenObject = new JsonObject();
-        value.accept(moltenObject);
+	public JsonArray array(Consumer<JsonArray> value) {
+		JsonArray moltenArray = new JsonArray();
+		value.accept(moltenArray);
 
-        jsonArray.put(moltenObject.toJson());
+		jsonArray.put(moltenArray.toJson());
 
-        return this;
-    }
+		return this;
+	}
 
-    public JsonArray array(Consumer<JsonArray> value) {
-        JsonArray moltenArray = new JsonArray();
-        value.accept(moltenArray);
+	public JsonArray object(Consumer<JsonObject> value) {
+		JsonObject moltenObject = new JsonObject();
+		value.accept(moltenObject);
 
-        jsonArray.put(moltenArray.toJson());
+		jsonArray.put(moltenObject.toJson());
 
-        return this;
-    }
+		return this;
+	}
 
-    private boolean isEmpty(Void[] values) {
-        return values != null && values.length == 0;
-    }
+	public JSONArray toJson() {
+		return jsonArray;
+	}
 
-    public JSONArray toJson() {
-        return jsonArray;
-    }
+	@Override
+	public String toString() {
+		return jsonArray.toString();
+	}
 
-    @Override
-    public String toString() {
-        return jsonArray.toString();
-    }
-
-    public String toPrettyString() {
-        return suppress(() -> jsonArray.toString(4));
-    }
+	public String toPrettyString() {
+		return suppress(() -> jsonArray.toString(4));
+	}
 }
