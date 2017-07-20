@@ -13,13 +13,13 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 @DisplayName("Json")
 public class JsonTests {
 	@Test
-	@DisplayName("should be able to create an empty JSON object")
+	@DisplayName("should create an empty JSON object")
 	public void createObject() throws JSONException {
 		assertEquals(object().toJson(), new JSONObject(), true);
 	}
 
 	@Test
-	@DisplayName("should be able to create an empty JSON array")
+	@DisplayName("should create an empty JSON array")
 	public void createArray() throws JSONException {
 		assertEquals(array().toJson(), new JSONArray(), true);
 	}

@@ -3,24 +3,31 @@ package com.github.helpermethod.molten;
 import com.github.helpermethod.molten.type.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.json.JSONObject.NULL;
+import java.util.stream.Stream;
+
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
-// TODO parametrize tests
 @DisplayName("A JsonObject")
 public class JsonObjectTests {
 	private final JsonObject jsonObject = new JsonObject();
 
-	@Test
+	@ParameterizedTest
+	@MethodSource("jsonProvider")
 	@DisplayName("should be able to add a string property")
-	public void addStringProperty() throws JSONException {
-		assertEquals(jsonObject.string("key", "value").toJson(), new JSONObject().put("key", "value"), true);
+	public void addStringProperty(JsonObject expected, JSONObject actual) throws JSONException {
+		assertEquals(expected.toJson(), actual, true);
 	}
 
+	private static Stream<Arguments> jsonProvider() throws JSONException {
+		return Stream.of(
+			Arguments.of(new JsonObject().string("key", "value"), new JSONObject().put("key", "value")));
+	}
+/*
 	@Test
 	@DisplayName("should be able to add a number property")
 	public void addNumberProperty() throws JSONException {
@@ -38,4 +45,5 @@ public class JsonObjectTests {
 	public void addNullProperty() throws JSONException {
 		assertEquals(jsonObject.nil("key").toJson(), new JSONObject().put("key", NULL), true);
 	}
+	*/
 }
