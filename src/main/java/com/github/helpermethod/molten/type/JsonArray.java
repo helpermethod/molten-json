@@ -29,7 +29,6 @@ public class JsonArray {
 		return this;
 	}
 
-
 	public JsonArray array(Consumer<JsonArray> value) {
 		JsonArray moltenArray = new JsonArray();
 		value.accept(moltenArray);

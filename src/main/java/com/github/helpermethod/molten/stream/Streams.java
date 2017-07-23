@@ -1,10 +1,8 @@
 package com.github.helpermethod.molten.stream;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.Arrays.stream;
 import static java.util.stream.IntStream.range;
 
 public class Streams {
@@ -16,6 +14,6 @@ public class Streams {
     }
 
     public static Stream<Double> ofAll(double[] values) {
-        return stream(values).boxed();
+        return Arrays.stream(values).boxed();
     }
 }
