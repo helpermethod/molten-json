@@ -1,30 +1,55 @@
 package com.github.helpermethod.molten;
 
 import com.github.helpermethod.molten.type.JsonObject;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import static org.json.JSONObject.NULL;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
+import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
-public class JsonObjectTests {
-	@ParameterizedTest
-	@MethodSource("jsonProvider")
-	public void addStringProperty(JsonObject expected, JSONObject actual, String type) throws JSONException {
-		assertEquals(expected.toJson(), actual, true);
+@DisplayName("A JsonObject")
+class JsonObjectTests {
+	private final JsonObject jsonObject = new JsonObject();
+
+	@Test
+	@DisplayName("should add a string property")
+	void addStringProperty() throws JSONException {
+		assertEquals(jsonObject.string("key", "value").toJson(), new JSONObject().put("key", "value"), STRICT);
 	}
 
-	private static Stream<Arguments> jsonProvider() throws JSONException {
-		return Stream.of(
-			Arguments.of(new JsonObject().string("key", "value"), new JSONObject().put("key", "value"), "string"),
-			Arguments.of(new JsonObject().number("key", 1), new JSONObject().put("key", 1), "number"),
-			Arguments.of(new JsonObject().bool("key", true), new JSONObject().put("key", true), "boolean"),
-			Arguments.of(new JsonObject().nil("key"), new JSONObject().put("key", NULL), "null")
-		);
+	@Test
+	@DisplayName("should add a number property")
+	void addNumberProperty() throws JSONException {
+		assertEquals(new JSONObject().put("key", 1), jsonObject.number("key", 1).toJson(), STRICT);
+	}
+
+	@Test
+	@DisplayName("should add an object property")
+	void addObjectProperty() throws JSONException {
+		assertEquals(new JSONObject().put("key", new JSONObject()), jsonObject.object("key", o -> {}).toJson(), STRICT);
+	}
+
+	@Test
+	@DisplayName("should add an array property")
+	void addArrayProperty() throws JSONException {
+		assertEquals(new JSONObject().put("key", new JSONArray()), jsonObject.array("key", a -> {}).toJson(), STRICT);
+	}
+
+	@Test
+	@DisplayName("should add a boolean property")
+	void addBooleanProperty() throws JSONException {
+		assertEquals(new JSONObject().put("key", true), jsonObject.bool("key", true).toJson(), STRICT);
+	}
+
+	@Test
+	@DisplayName("should add a null property")
+	void addNullProperty() throws JSONException {
+		assertEquals(new JSONObject().put("key", NULL), jsonObject.nil("key").toJson(), STRICT);
 	}
 }

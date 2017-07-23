@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M6'
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
     }
 }
 
@@ -20,7 +20,7 @@ buildScan {
 }
 
 ext {
-    junitJupiterVersion = '5.0.0-M6'
+    junitJupiterVersion = '5.0.0-M4'
 }
 
 repositories {

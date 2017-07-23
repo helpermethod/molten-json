@@ -10,18 +10,19 @@ import org.junit.jupiter.api.TestFactory;
 import static com.github.helpermethod.molten.Json.array;
 import static com.github.helpermethod.molten.Json.object;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
+import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
 @DisplayName("Json")
-public class JsonTests {
+class JsonTests {
 	@Test
 	@DisplayName("should create an empty JSON object")
-	public void createObject() throws JSONException {
-		assertEquals(object().toJson(), new JSONObject(), true);
+	void createObject() throws JSONException {
+		assertEquals(new JSONObject(), object().toJson(), STRICT);
 	}
 
 	@Test
 	@DisplayName("should create an empty JSON array")
-	public void createArray() throws JSONException {
-		assertEquals(array().toJson(), new JSONArray(), true);
+	void createArray() throws JSONException {
+		assertEquals(new JSONArray(), array().toJson(), STRICT);
 	}
 }

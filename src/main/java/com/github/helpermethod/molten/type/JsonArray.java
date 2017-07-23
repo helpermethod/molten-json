@@ -29,17 +29,6 @@ public class JsonArray {
 		return this;
 	}
 
-	public JsonArray bool(boolean... values) {
-		Streams.ofAll(values).forEach(jsonArray::put);
-
-		return this;
-	}
-
-	public JsonArray nil(int number) {
-		range(0, number).forEach(i -> jsonArray.put(NULL));
-
-		return this;
-	}
 
 	public JsonArray array(Consumer<JsonArray> value) {
 		JsonArray moltenArray = new JsonArray();
@@ -55,6 +44,18 @@ public class JsonArray {
 		value.accept(moltenObject);
 
 		jsonArray.put(moltenObject.toJson());
+
+		return this;
+	}
+
+	public JsonArray bool(boolean... values) {
+		Streams.ofAll(values).forEach(jsonArray::put);
+
+		return this;
+	}
+
+	public JsonArray nil(int number) {
+		range(0, number).forEach(i -> jsonArray.put(NULL));
 
 		return this;
 	}
