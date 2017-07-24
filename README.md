@@ -2,36 +2,35 @@
 
 ```java
 JSONObject actual = new JSONObject()
-    .put("menu", new JSONObject()
-        .put("id", "file")
-        .put("value", "File")
-        .put("popup", new JSONObject()
-            .put("menuitems", new JSONArray()
-                .put(new JSONObject()
-                    .put("value", "New")
-                    .put("onclick", "CreateNewDoc()"))
-                .put(new JSONObject()
-                    .put("value", "Open")
-                    .put("onclick", "OpenDoc()"))
-                .put(new JSONObject()
-                    .put("value", "Close")
-                    .put("onclick", "CloseDoc()")))));
+    .put("name", "molten-json")
+    .put("version", "0.1.0")
+    .put("description", "A fluent Java 8 DSL for working with JSON.")
+    .put("repository", new JSONObject()
+        .put("type", "git")
+        .put("url", "https://github.com/helpermethod/molten-json"))
+    .put("keywords", new JSONArray()
+        .put("json")
+        .put("java-8")
+        .put("fluent")
+        .put("dsl"))
+    .put("author", "helpermethod")
+    .put("license", "Apache 2")
+    .put("bugs", new JSONObject()
+        .put("url", "https://github.com/helpermethod/molten-json/issues"));
 ```
 
 ```java
 JSONObject expected = object(o -> o
-    .object("menu", menu -> menu
-        .string("id", "file")
-        .string("value", "File")
-        .object("popup", popup -> popup
-            .array("menuitems", menuitems -> menuitems
-                .object(menuitem -> menuitem
-                    .string("value", "New")
-                    .string("onclick", "CreateNewDoc()"))
-                .object(menuitem -> menuitem
-                    .string("value", "Open")
-                    .string("onclick", "OpenDoc()"))
-                .object(menuitem -> menuitem
-                    .string("value", "Close")
-                    .string("onclick", "CloseDoc()")))))).toJson();
+    .string("name", "molten-json")
+    .string("version", "0.1.0")
+    .string("description", "A fluent Java 8 DSL for working with JSON.")
+    .object("repository", r -> r
+        .string("type", "git")
+        .string("url", "https://github.com/helpermethod/molten-json"))
+    .array("keywords", k -> k
+        .string("json", "java-8", "fluent", "dsl"))
+    .string("author", "helpermethod")
+    .string("license", "Apache 2")
+    .object("bugs", b -> b
+        .string("url", "https://github.com/helpermethod/molten-json/issues"))).toJson();
 ```

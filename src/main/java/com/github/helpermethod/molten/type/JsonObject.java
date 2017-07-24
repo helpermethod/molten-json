@@ -16,21 +16,24 @@ public class JsonObject {
 	}
 
 	public JsonObject string(String key, String value) {
+		requireNonNull(key, "JSON keys must not be null.");
+
 		suppress(() -> jsonObject.put(key, value));
 
 		return this;
 	}
 
 	public JsonObject number(String key, double value) {
-		requireNonNull(key, "JSON keys must not be null");
+		requireNonNull(key, "JSON keys must not be null.");
 
 		suppress(() -> jsonObject.put(key, value));
 
 		return this;
 	}
 
-
 	public JsonObject array(String key, Consumer<JsonArray> value) {
+		requireNonNull(key, "JSON keys must not be null.");
+
 		JsonArray moltenArray = new JsonArray();
 		value.accept(moltenArray);
 
@@ -40,6 +43,8 @@ public class JsonObject {
 	}
 
 	public JsonObject object(String key, Consumer<JsonObject> value) {
+		requireNonNull(key, "JSON keys must not be null.");
+
 		JsonObject moltenObject = new JsonObject();
 		value.accept(moltenObject);
 
@@ -50,12 +55,16 @@ public class JsonObject {
 
 
 	public JsonObject bool(String key, boolean value) {
+		requireNonNull(key, "JSON keys must not be null.");
+
 		suppress(() -> jsonObject.put(key, value));
 
 		return this;
 	}
 
 	public JsonObject nil(String key) {
+		requireNonNull(key, "JSON keys must not be null.");
+
 		suppress(() -> jsonObject.put(key, NULL));
 
 		return this;

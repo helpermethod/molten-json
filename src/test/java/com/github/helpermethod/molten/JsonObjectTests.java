@@ -24,7 +24,7 @@ class JsonObjectTests {
 	}
 
 	@Test
-	@DisplayName("should add a number property")
+	@DisplayName("should add a numbers property")
 	void addNumberProperty() throws JSONException {
 		assertEquals(new JSONObject().put("key", 1), jsonObject.number("key", 1).toJson(), STRICT);
 	}

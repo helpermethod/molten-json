@@ -17,13 +17,13 @@ public class JsonArray {
 		this.jsonArray = new JSONArray();
 	}
 
-	public JsonArray string(String... values) {
+	public JsonArray strings(String... values) {
 		Arrays.stream(values).forEach(jsonArray::put);
 
 		return this;
 	}
 
-	public JsonArray number(double... values) {
+	public JsonArray numbers(double... values) {
 		Streams.ofAll(values).forEach(jsonArray::put);
 
 		return this;
@@ -47,13 +47,13 @@ public class JsonArray {
 		return this;
 	}
 
-	public JsonArray bool(boolean... values) {
+	public JsonArray bools(boolean... values) {
 		Streams.ofAll(values).forEach(jsonArray::put);
 
 		return this;
 	}
 
-	public JsonArray nil(int number) {
+	public JsonArray nils(int number) {
 		range(0, number).forEach(i -> jsonArray.put(NULL));
 
 		return this;
