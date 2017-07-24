@@ -9,7 +9,7 @@ import static com.github.helpermethod.molten.Json.object;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
-class PackageTests {
+class ProjectTests {
 	@Test
 	void testPackage() throws JSONException {
 		JSONObject actual = new JSONObject()
@@ -37,7 +37,7 @@ class PackageTests {
 				.string("type", "git")
 				.string("url", "https://github.com/helpermethod/molten-json"))
 			.array("keywords", k -> k
-				.strings("json", "java-8", "fluent", "dsl"))
+				.string("json", "java-8", "fluent", "dsl"))
 			.string("author", "helpermethod")
 			.string("license", "Apache 2")
 			.object("bugs", b -> b
