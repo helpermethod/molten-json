@@ -5,10 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 
-import static com.github.helpermethod.molten.Json.array;
-import static com.github.helpermethod.molten.Json.object;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
@@ -17,12 +14,12 @@ class JsonTests {
 	@Test
 	@DisplayName("should create an empty JSON object")
 	void createObject() throws JSONException {
-		assertEquals(new JSONObject(), object().toJson(), STRICT);
+		assertEquals(new JSONObject(), new Json().object().toJson(), STRICT);
 	}
 
 	@Test
 	@DisplayName("should create an empty JSON array")
 	void createArray() throws JSONException {
-		assertEquals(new JSONArray(), array().toJson(), STRICT);
+		assertEquals(new JSONArray(), new Json().array().toJson(), STRICT);
 	}
 }

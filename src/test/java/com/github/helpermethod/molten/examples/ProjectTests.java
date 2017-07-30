@@ -1,11 +1,11 @@
 package com.github.helpermethod.molten.examples;
 
+import com.github.helpermethod.molten.Json;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import static com.github.helpermethod.molten.Json.object;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
@@ -29,19 +29,20 @@ class ProjectTests {
 			.put("bugs", new JSONObject()
 				.put("url", "https://github.com/helpermethod/molten-json/issues"));
 
-		JSONObject expected = object(o -> o
-			.string("name", "molten-json")
-			.string("version", "0.1.0")
-			.string("description", "A fluent Java 8 DSL for working with JSON.")
-			.object("repository", r -> r
-				.string("type", "git")
-				.string("url", "https://github.com/helpermethod/molten-json"))
-			.array("keywords", k -> k
-				.string("json", "java-8", "fluent", "dsl"))
-			.string("author", "helpermethod")
-			.string("license", "Apache 2")
-			.object("bugs", b -> b
-				.string("url", "https://github.com/helpermethod/molten-json/issues"))).toJson();
+		JSONObject expected = new Json()
+			.object(o -> o
+				.string("name", "molten-json")
+				.string("version", "0.1.0")
+				.string("description", "A fluent Java 8 DSL for working with JSON.")
+				.object("repository", r -> r
+					.string("type", "git")
+					.string("url", "https://github.com/helpermethod/molten-json"))
+				.array("keywords", k -> k
+					.string("json", "java-8", "fluent", "dsl"))
+				.string("author", "helpermethod")
+				.string("license", "Apache 2")
+				.object("bugs", b -> b
+					.string("url", "https://github.com/helpermethod/molten-json/issues"))).toJson();
 
 		assertEquals(actual, expected, STRICT);
 	}
