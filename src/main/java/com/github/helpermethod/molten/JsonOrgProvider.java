@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class JsonOrgProvider implements JsonProvider {
+	private final NullHandlingStrategy nullHandlingStrategy;
 	private final Supplier<?> nullTransformer;
 
 	public JsonOrgProvider() {
@@ -17,12 +18,13 @@ public class JsonOrgProvider implements JsonProvider {
 		JsonConfiguration jsonConfiguration = new JsonConfiguration();
 		c.accept(jsonConfiguration);
 
+		nullHandlingStrategy = jsonConfiguration.nullHandlingStrategy();
 		nullTransformer = jsonConfiguration.nullTransformer();
 	}
 
 	@Override
 	public JsonOrgObject object() {
-		return null;
+		return new JsonOrgObject(nullHandlingStrategy, nullTransformer);
 	}
 
 	@Override

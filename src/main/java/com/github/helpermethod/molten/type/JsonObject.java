@@ -3,12 +3,12 @@ package com.github.helpermethod.molten.type;
 import java.util.function.Consumer;
 
 public interface JsonObject<T> {
-	JsonObject string(String key, String value);
-	JsonObject number(String key, Number value);
-	JsonObject array(String key, Consumer<JsonOrgArray> value);
-	JsonObject object(String key, Consumer<JsonOrgObject> value);
-	JsonObject bool(String key, Boolean value);
-	JsonObject nil(String key);
+	JsonObject<T> string(String key, String value);
+	JsonObject<T> number(String key, Number value);
+	JsonObject<T> array(String key, Consumer<JsonOrgArray> value);
+	JsonObject<T> object(String key, Consumer<JsonOrgObject> value);
+	JsonObject<T> bool(String key, Boolean value);
+	JsonObject<T> nil(String key);
 	T toJson();
 	String toString();
 	String toPrettyString();

@@ -4,6 +4,7 @@ import com.github.helpermethod.molten.NullHandlingStrategy;
 import org.json.JSONObject;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static com.github.helpermethod.molten.function.Errors.suppress;
 import static java.util.Objects.requireNonNull;
@@ -12,10 +13,12 @@ import static org.json.JSONObject.NULL;
 public class JsonOrgObject implements JsonObject<JSONObject> {
 	private final JSONObject jsonObject;
 	private final NullHandlingStrategy nullHandlingStrategy;
+	private final Supplier<?> nullTransformer;
 
-	public JsonOrgObject(NullHandlingStrategy nullHandlingStrategy) {
+	public JsonOrgObject(NullHandlingStrategy nullHandlingStrategy, Supplier<?> nullTransformer) {
 		this.jsonObject = new JSONObject();
 		this.nullHandlingStrategy = nullHandlingStrategy;
+		this.nullTransformer = nullTransformer;
 	}
 
 	@Override
@@ -60,7 +63,7 @@ public class JsonOrgObject implements JsonObject<JSONObject> {
 	public JsonOrgObject object(String key, Consumer<JsonOrgObject> value) {
 		requireNonNull(key, "JSON keys must not be null.");
 
-		JsonOrgObject moltenObject = new JsonOrgObject(nullHandlingStrategy);
+		JsonOrgObject moltenObject = new JsonOrgObject(nullHandlingStrategy, nullTransformer);
 		value.accept(moltenObject);
 
 		suppress(() -> jsonObject.put(key, moltenObject.toJson()));

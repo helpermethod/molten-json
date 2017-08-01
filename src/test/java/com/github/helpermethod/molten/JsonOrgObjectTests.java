@@ -1,5 +1,6 @@
 package com.github.helpermethod.molten;
 
+import com.github.helpermethod.molten.type.JsonObject;
 import com.github.helpermethod.molten.type.JsonOrgObject;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -7,19 +8,19 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.helpermethod.molten.NullHandlingStrategy.*;
+import static com.github.helpermethod.molten.NullHandlingStrategy.ALLOW_NULL;
 import static org.json.JSONObject.NULL;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
 @DisplayName("A JsonOrgObject")
-class JsonObjectTests {
-	private final JsonOrgObject jsonObject = new JsonOrgObject(ALLOW_NULL);
+class JsonOrgObjectTests {
+	private final JsonObject<JSONObject> jsonObject = new JsonOrgObject(ALLOW_NULL);
 
 	@Test
 	@DisplayName("should add a string property")
 	void addStringProperty() throws JSONException {
-		assertEquals(jsonObject.string("key", "value").toJson(), new JSONObject().put("key", "value"), STRICT);
+		assertEquals(new JSONObject().put("key", "value"), jsonObject.string("key", "value").toJson(), STRICT);
 	}
 
 	@Test
