@@ -29,7 +29,10 @@ public class JsonOrgProvider implements JsonProvider {
 
 	@Override
 	public JsonOrgObject object(Consumer<JsonOrgObject> c) {
-		return null;
+		JsonOrgObject jsonOrgObject = new JsonOrgObject(nullHandlingStrategy, nullTransformer);
+		c.accept(jsonOrgObject);
+
+		return jsonOrgObject;
 	}
 
 	@Override
