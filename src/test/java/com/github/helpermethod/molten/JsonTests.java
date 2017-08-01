@@ -1,25 +1,27 @@
 package com.github.helpermethod.molten;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
-import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
-
-@DisplayName("Json")
+@DisplayName("A Json")
 class JsonTests {
 	@Test
-	@DisplayName("should create an empty JSON object")
+	@DisplayName("should create a builder with default configuration")
 	void createObject() throws JSONException {
-		assertEquals(new JSONObject(), new Json().object().toJson(), STRICT);
+		Json json = new Json();
+
+		// TODO assertJ
 	}
 
 	@Test
-	@DisplayName("should create an empty JSON array")
+	@DisplayName("should create a builder with a custom configuration")
 	void createArray() throws JSONException {
-		assertEquals(new JSONArray(), new Json().array().toJson(), STRICT);
+		new Json(c -> c
+			.jsonProvider(new JsonOrgProvider())
+			.nullHandling(NullHandlingStrategy.IGNORE_NULL)
+			.nullTransformer(() -> ""));
+
+		// TODO assertJ
 	}
 }

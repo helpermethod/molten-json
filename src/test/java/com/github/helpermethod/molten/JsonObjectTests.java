@@ -1,20 +1,20 @@
 package com.github.helpermethod.molten;
 
-import com.github.helpermethod.molten.type.JsonObject;
+import com.github.helpermethod.molten.type.JsonOrgObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.github.helpermethod.molten.NullHandling.*;
+import static com.github.helpermethod.molten.NullHandlingStrategy.*;
 import static org.json.JSONObject.NULL;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
-@DisplayName("A JsonObject")
+@DisplayName("A JsonOrgObject")
 class JsonObjectTests {
-	private final JsonObject jsonObject = new JsonObject(ALLOW_NULL);
+	private final JsonOrgObject jsonObject = new JsonOrgObject(ALLOW_NULL);
 
 	@Test
 	@DisplayName("should add a string property")

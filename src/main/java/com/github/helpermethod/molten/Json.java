@@ -1,43 +1,32 @@
 package com.github.helpermethod.molten;
 
-import com.github.helpermethod.molten.type.JsonArray;
-import com.github.helpermethod.molten.type.JsonObject;
+import com.github.helpermethod.molten.type.JsonOrgArray;
+import com.github.helpermethod.molten.type.JsonOrgObject;
 
 import java.util.function.Consumer;
 
 public class Json {
-    private final NullHandling nullHandling;
+	private final JsonProvider jsonProvider;
 
-    public Json() {
-        this(c -> {});
-    }
+	public Json(JsonProvider jsonProvider) {
+		this.jsonProvider = jsonProvider;
+	}
 
-    public Json(Consumer<JsonConfiguration> c) {
-        JsonConfiguration jsonConfiguration = new JsonConfiguration();
-        c.accept(jsonConfiguration);
+	public JsonOrgObject object(Consumer<JsonOrgObject> c) {
+		JsonOrgObject moltenObject = jsonProvider.object();
+		c.accept(moltenObject);
 
-        nullHandling = jsonConfiguration.nullHandling();
-    }
+		return moltenObject;
+	}
 
-    public JsonObject object() {
-        return new JsonObject(nullHandling);
-    }
+	public JsonOrgArray array() {
+		return jsonProvider.array();
+	}
 
-    public JsonObject object(Consumer<JsonObject> c) {
-        JsonObject moltenObject = new JsonObject(nullHandling);
-        c.accept(moltenObject);
+	public JsonOrgArray array(Consumer<JsonOrgArray> c) {
+		JsonOrgArray moltenArray = jsonProvider.array(c);
+		c.accept(moltenArray);
 
-        return moltenObject;
-    }
-
-    public JsonArray array() {
-        return new JsonArray(nullHandling);
-    }
-
-    public JsonArray array(Consumer<JsonArray> c) {
-        JsonArray moltenArray = new JsonArray(nullHandling);
-        c.accept(moltenArray);
-
-        return moltenArray;
-    }
+		return moltenArray;
+	}
 }

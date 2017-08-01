@@ -1,15 +1,28 @@
 package com.github.helpermethod.molten;
 
-public class JsonConfiguration {
-	private NullHandling nullHandling = NullHandling.ALLOW_NULL;
+import java.util.function.Supplier;
 
-	public JsonConfiguration nullHandling(NullHandling nullHandling) {
-		this.nullHandling = nullHandling;
+public class JsonConfiguration {
+	private NullHandlingStrategy nullHandlingStrategyStrategy = NullHandlingStrategy.ALLOW_NULL;
+	private Supplier<?> nullTransformer = () -> null;
+
+	Supplier<?> nullTransformer() {
+		return nullTransformer;
+	}
+
+	public <T> JsonConfiguration nullTransformer(Supplier<T> nullTransformer) {
+		this.nullTransformer = nullTransformer;
 
 		return this;
 	}
 
-	public NullHandling nullHandling() {
-		return nullHandling;
+	NullHandlingStrategy nullHandlingStrategy() {
+		return nullHandlingStrategyStrategy;
+	}
+
+	public JsonConfiguration nullHandlingStrategy(NullHandlingStrategy nullHandlingStrategyStrategy) {
+		this.nullHandlingStrategyStrategy = nullHandlingStrategyStrategy;
+
+		return this;
 	}
 }
