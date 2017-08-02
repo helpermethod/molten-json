@@ -1,7 +1,7 @@
 # Usage
 
 ```java
-JSONObject actual = new JSONObject()
+JSONObject project = new JSONObject()
     .put("name", "molten-json")
     .put("version", "0.1.0")
     .put("description", "A fluent Java 8 DSL for working with JSON.")
@@ -20,17 +20,17 @@ JSONObject actual = new JSONObject()
 ```
 
 ```java
-JSONObject expected = object(o -> o
-    .string("name", "molten-json")
-    .string("version", "0.1.0")
-    .string("description", "A fluent Java 8 DSL for working with JSON.")
-    .object("repository", r -> r
-        .string("type", "git")
-        .string("url", "https://github.com/helpermethod/molten-json"))
-    .array("keywords", k -> k
-        .string("json", "java-8", "fluent", "dsl"))
-    .string("author", "helpermethod")
-    .string("license", "Apache 2")
-    .object("bugs", b -> b
-        .string("url", "https://github.com/helpermethod/molten-json/issues"))).toJson();
+JSONObject project = new Json()
+    .object(o -> o
+        .string("name", "molten-json")
+        .string("version", "0.1.0")
+        .string("description", "A fluent Java 8 DSL for working with JSON.")
+        .object("repository", r -> r
+            .string("type", "git")
+            .string("url", "https://github.com/helpermethod/molten-json"))
+        .array("keywords", k -> k.strings("json", "java-8", "fluent", "dsl"))
+        .string("author", "helpermethod")
+        .string("license", "Apache 2")
+        .object("bugs", b -> b.string("url", "https://github.com/helpermethod/molten-json/issues")))
+    .toJson();
 ```
