@@ -1,3 +1,5 @@
++[![Download](https://api.bintray.com/packages/helpermethod/maven/molten-json/images/download.svg) ](https://bintray.com/helpermethod/maven/molten-json/_latestVersion)
+
 # Usage
 
 ```java
