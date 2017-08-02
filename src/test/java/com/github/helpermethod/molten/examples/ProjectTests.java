@@ -37,12 +37,11 @@ class ProjectTests {
 				.object("repository", r -> r
 					.string("type", "git")
 					.string("url", "https://github.com/helpermethod/molten-json"))
-				.array("keywords", k -> k
-					.string("json", "java-8", "fluent", "dsl"))
+				.array("keywords", k -> k.strings("json", "java-8", "fluent", "dsl"))
 				.string("author", "helpermethod")
 				.string("license", "Apache 2")
-				.object("bugs", b -> b
-					.string("url", "https://github.com/helpermethod/molten-json/issues"))).toJson();
+				.object("bugs", b -> b.string("url", "https://github.com/helpermethod/molten-json/issues")))
+			.toJson();
 
 		assertEquals(actual, expected, STRICT);
 	}
