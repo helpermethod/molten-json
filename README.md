@@ -1,6 +1,6 @@
 # Molten JSON
 
-[![Download](https://api.bintray.com/packages/helpermethod/maven/molten-json/images/download.svg) ](https://bintray.com/helpermethod/maven/molten-json/_latestVersion)
+[![download](https://api.bintray.com/packages/helpermethod/maven/molten-json/images/download.svg) ](https://bintray.com/helpermethod/maven/molten-json/_latestVersion)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://raw.githubusercontent.com/helpermethod/molten-json/master/LICENSE)
 
 `molten-json` is a fluent Java 8 DSL for building nested JSON documents.
