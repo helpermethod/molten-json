@@ -11,7 +11,7 @@ import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
 class ProjectTests {
 	@Test
-	void testPackage() throws JSONException {
+	void testProject() throws JSONException {
 		JSONObject expected = new JSONObject()
 			.put("name", "molten-json")
 			.put("version", "0.1.0")
