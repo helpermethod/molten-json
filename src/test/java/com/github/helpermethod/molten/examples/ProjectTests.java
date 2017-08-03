@@ -12,7 +12,7 @@ import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 class ProjectTests {
 	@Test
 	void testPackage() throws JSONException {
-		JSONObject actual = new JSONObject()
+		JSONObject expected = new JSONObject()
 			.put("name", "molten-json")
 			.put("version", "0.1.0")
 			.put("description", "A fluent Java 8 DSL for working with JSON.")
@@ -29,7 +29,7 @@ class ProjectTests {
 			.put("bugs", new JSONObject()
 				.put("url", "https://github.com/helpermethod/molten-json/issues"));
 
-		JSONObject expected = new Json()
+		JSONObject actual = new Json()
 			.object(o -> o
 				.string("name", "molten-json")
 				.string("version", "0.1.0")
@@ -43,6 +43,6 @@ class ProjectTests {
 				.object("bugs", b -> b.string("url", "https://github.com/helpermethod/molten-json/issues")))
 			.toJson();
 
-		assertEquals(actual, expected, STRICT);
+		assertEquals(expected, actual, STRICT);
 	}
 }

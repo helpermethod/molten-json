@@ -3,19 +3,20 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M6'
     }
 }
 
 plugins {
     id 'java'
-    id 'nebula.nebula-bintray' version '3.5.2'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.7.3'
 }
 
 apply plugin: 'org.junit.platform.gradle.plugin'
 
 ext {
-    junitJupiterVersion = '5.0.0-M4'
+    junitJupiterVersion = '5.0.0-M6'
 }
 
 repositories {
@@ -31,14 +32,25 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
 }
 
+group = 'com.helpermethod'
 version = '0.1.0'
 description = 'A fluent Java 8 DSL for working with JSON.'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+    }
+}
 
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_API_KEY')
-    publications = ['nebula']
-    dryRun = false
+    publications = ['maven']
     publish = true
     pkg {
         repo = 'maven'
@@ -50,11 +62,13 @@ bintray {
         licenses = ['Apache-2.0']
         labels = ['json', 'java-8', 'fluent', 'dsl']
         publicDownloadNumbers = true
-        attributes = [:]
         version {
             name = project.version
+            released = new Date()
             vcsTag = project.version
-            attributes = [:]
+            gpg {
+                sign = true
+            }
         }
     }
 }

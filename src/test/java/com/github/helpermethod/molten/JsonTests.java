@@ -11,18 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Json")
 class JsonTests {
 	@Test
-	@DisplayName("should create a builder with default configuration")
+	@DisplayName("should create a builder with nullHandlingStrategy set to ALLOW_NULL")
 	void createObject() throws JSONException {
-		Json json = new Json();
-
-		assertThat(json).hasFieldOrPropertyWithValue("nullHandlingStrategy", ALLOW_NULL);
+		assertThat(new Json()).hasFieldOrPropertyWithValue("nullHandlingStrategy", ALLOW_NULL);
 	}
 
 	@Test
-	@DisplayName("should create a builder with custom configuration")
+	@DisplayName("should create a builder with nullHandlingStrategy set to IGNORE_NULL")
 	void createArray() throws JSONException {
-		Json json = new Json(IGNORE_NULL);
-
-		assertThat(json).hasFieldOrPropertyWithValue("nullHandlingStrategy", IGNORE_NULL);
+		assertThat(new Json(IGNORE_NULL)).hasFieldOrPropertyWithValue("nullHandlingStrategy", IGNORE_NULL);
 	}
 }

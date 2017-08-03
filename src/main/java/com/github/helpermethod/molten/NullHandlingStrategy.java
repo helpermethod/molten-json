@@ -3,6 +3,8 @@ package com.github.helpermethod.molten;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+import static java.util.Objects.requireNonNull;
+
 public enum NullHandlingStrategy implements Predicate<Object> {
 	IGNORE_NULL(Objects::nonNull),
 	ALLOW_NULL(e -> true);
