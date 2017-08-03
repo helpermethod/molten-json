@@ -1,4 +1,10 @@
-# Usage
+# Molten JSON
+
+[![Download](https://api.bintray.com/packages/helpermethod/maven/molten-json/images/download.svg) ](https://bintray.com/helpermethod/maven/molten-json/_latestVersion)
+
+A fluent Java 8 DSL for working with JSON.
+
+## Usage
 
 ```java
 JSONObject project = new JSONObject()
