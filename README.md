@@ -37,7 +37,8 @@ JSONObject project = new Json()
         .array("keywords", k -> k.strings("json", "java-8", "fluent", "dsl"))
         .string("author", "helpermethod")
         .string("license", "Apache 2")
-        .object("bugs", b -> b.string("url", "https://github.com/helpermethod/molten-json/issues")))
+        .object("bugs", b -> b
+            .string("url", "https://github.com/helpermethod/molten-json/issues")))
     .toJson();
 ```
 
