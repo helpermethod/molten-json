@@ -59,7 +59,6 @@ JSONObject project = new Json()
         <groupId>com.helpermethod</groupId>
         <artifactId>molten-json</artifactId>
         <version>0.1.0</version>
-        <type>pom</type>
     </dependency>
 </dependencies>
 ```
