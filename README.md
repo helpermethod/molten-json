@@ -26,7 +26,7 @@
 ```
 
 ```java
-JSONObject project = new Json()
+String project = new Json()
     .object(o -> o
         .string("name", "molten-json")
         .string("version", "0.1.0")
@@ -39,7 +39,7 @@ JSONObject project = new Json()
         .string("license", "Apache 2")
         .object("bugs", b -> b
             .string("url", "https://github.com/helpermethod/molten-json/issues")))
-    .toJson();
+    .toPrettyString();
 ```
 
 ## Getting Started
